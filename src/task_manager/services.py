@@ -80,9 +80,7 @@ def find_task_by_id(tasks, task_id):
 
     """Find a task by its ID and return it."""
 
-    print('Searching for ID:', task_id)
     for task in tasks:
-        print('Checking task ID:', task.id, type(task.id))
         if task.id == task_id:
             return task
         

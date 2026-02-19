@@ -6,11 +6,11 @@ class Task:
         self.title = title
         self.completed = completed
 
-    def mark_as_completed(self):
+    def toggle_status(self):
 
-        """Mark the task as completed."""
+        """Toggle the completion status of the task."""
 
-        self.completed = True
+        self.completed = not self.completed
 
     def to_dict(self):
 
