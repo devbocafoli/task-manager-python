@@ -10,3 +10,6 @@ __pycache__/
 
 # Dados locais
 data/data.json
+
+#Ambiente Virtual
+.venv/

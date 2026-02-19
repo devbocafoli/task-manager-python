@@ -1,4 +1,5 @@
 import json
+from task_manager.models.tasks import Task
 
 tasks_file = 'data/data.json'
 
@@ -7,11 +8,11 @@ def load_tasks():
     """Load tasks from tasks_file and return them as a list."""
     
     try:
-        with open(tasks_file, 'r') as arq:
+        with open(tasks_file, 'r') as f:
 
-            tasks_data = json.load(arq)
+            data = json.load(f)
 
-            return tasks_data
+            return [Task.from_dict(item) for item in data]
         
     except (FileNotFoundError, json.JSONDecodeError):
 
@@ -22,6 +23,6 @@ def save_tasks(tasks):
 
     """Save task in tasks_file."""
 
-    with open(tasks_file, 'w') as arq:
+    with open(tasks_file, 'w') as f:
 
-        json.dump(tasks, arq, indent=4)
+        json.dump([task.to_dict() for task in tasks], f, indent=4)

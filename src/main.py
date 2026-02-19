@@ -1,4 +1,4 @@
-from services.tarefas import add_task, delete_task, list_tasks, toggle_task_status
+from task_manager.services import add_task, delete_task, list_tasks, toggle_task_status
 from time import sleep
 
 def show_tasks(tasks):
@@ -7,11 +7,8 @@ def show_tasks(tasks):
 
     sleep(0.5)
 
-    for idx, task in enumerate(tasks):
-
-        status = 'Completed' if task.get('completed') else 'Pending'
-
-        print(f' {idx + 1} - {task.get("title")} - {status}')
+    for task in tasks:
+        print(task)
 
         sleep(0.5)
         
@@ -53,19 +50,25 @@ while True:
 
     if option == '1':
 
+        # Add a Task
+        
+        tasks = list_tasks()
+
         try:
             task_title = input('Enter the task title: ')
-            added_task = add_task(task_title)
+            added_task = add_task(tasks, task_title)
 
             sleep(1)
 
-            print(f'Task {added_task["title"]} added successfully!')
+            print(f'Task "{added_task.title}" added successfully!')
 
         except ValueError as error:
             print(f'Error: {error}. Please Try Again.')
 
 
     elif option == '2':
+
+        # Delete a Task
         
         tasks = list_tasks()
 
@@ -75,12 +78,12 @@ while True:
             show_tasks(tasks)
 
         try:
-            idx_removed_task = int(input('Enter the index of the task you want to delete: '))
-            removed_task = delete_task(idx_removed_task)
+            task_id_to_delete = int(input('Enter the ID of the task you want to delete: '))
+            removed_task = delete_task(task_id_to_delete)
 
             sleep(1)
 
-            print(f'Task "{removed_task.get("title")}" deleted successfully!')
+            print(f'Task "{removed_task.title}" deleted successfully!')
 
         except ValueError as error:
             print(f'Error: {error}. Please Try Again.')
@@ -91,10 +94,19 @@ while True:
 
     elif option == '3':
 
-        show_tasks(list_tasks())
+        # Show all Tasks
+
+        tasks = list_tasks()
+
+        if not tasks:
+            print('No tasks available.')
+        else:
+            show_tasks(tasks)
 
 
     elif option == '4':
+
+        # Toggle Task Status (Completed/Pending)
 
         tasks = list_tasks()
 
@@ -104,13 +116,13 @@ while True:
             show_tasks(tasks)
 
         try:
-            idx_toggle_task = int(input('Enter the index of the task you want to toggle: '))
-            toggled_task = toggle_task_status(idx_toggle_task)
-            status = 'Completed' if toggled_task.get('completed') else 'Pending'
+            task_id_to_toggle = int(input('Enter the ID of the task you want to toggle: '))
+            toggled_task = toggle_task_status(task_id_to_toggle)
+            status = 'Completed' if toggled_task.completed else 'Pending'
 
             sleep(1)
 
-            print(f'Task "{toggled_task.get("title")}" marked as {status}, successfully!')
+            print(f'Task "{toggled_task.title}" marked as {status}, successfully!')
         
         except ValueError as error:
             print(f'Error: {error}. Please Try Again.')
@@ -120,6 +132,8 @@ while True:
 
 
     elif option == '0':
+
+        # Exit the Program
 
         print('Leaving the Program...')
         
