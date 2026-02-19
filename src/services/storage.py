@@ -1,32 +1,27 @@
 import json
-from time import sleep
 
-arquivo_tarefas = 'data/data.json'
+tasks_file = 'data/data.json'
 
-def carregar_dados():
+def load_tasks():
 
-    """Carrega os dados_conteudo do arquivo_tarefas JSON. Se o arquivo não existir ou estiver vazio, retorna uma lista vazia."""
+    """Load tasks from tasks_file and return them as a list."""
     
     try:
-        with open(arquivo_tarefas, 'r') as arq:
+        with open(tasks_file, 'r') as arq:
 
-            dados_conteudo = json.load(arq)
+            tasks_data = json.load(arq)
 
-            return dados_conteudo
+            return tasks_data
         
     except (FileNotFoundError, json.JSONDecodeError):
 
         return []
     
-def salvar_dados(dados_salvar):
-
-    """Salva os dados_conteudo no arquivo_tarefas JSON. Se o arquivo não existir, ele será criado."""
     
-    print('Salvando dados...')
+def save_tasks(tasks):
 
-    with open(arquivo_tarefas, 'w') as arq:
+    """Save task in tasks_file."""
 
-        json.dump(dados_salvar, arq, indent=4)
-        
-        sleep(1)
-        print('Dados salvos com sucesso!')
+    with open(tasks_file, 'w') as arq:
+
+        json.dump(tasks, arq, indent=4)

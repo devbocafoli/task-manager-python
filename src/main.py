@@ -1,59 +1,131 @@
-from services.storage import *
-from services.tarefas import *
+from services.tarefas import add_task, delete_task, list_tasks, toggle_task_status
 from time import sleep
 
-tarefas = []
+def show_tasks(tasks):
+
+    print(' Tasks:')
+
+    sleep(0.5)
+
+    for idx, task in enumerate(tasks):
+
+        status = 'Completed' if task.get('completed') else 'Pending'
+
+        print(f' {idx + 1} - {task.get("title")} - {status}')
+
+        sleep(0.5)
+        
+
+def show_menu():
+        
+    """Show the main menu of the program."""
+
+    print('=' * 50)
+
+    print('{:^50}'.format('TASK MANAGER'))
+
+    print('=' * 50)
+
+    print('  1 - Add Task')
+    print('  2 - Delete Task')
+    print('  3 - List Tasks')
+    print('  4 - Mark Task as Completed/Pending')
+    print('  0 - Exit Program')
+
+    print('=' * 50)
+
+    option = ' '
+
+    while option not in ['1', '2', '3', '4', '0']:
+
+        option = input('Enter the Desired Option: ')
+
+        if option not in ['1', '2', '3', '4', '0']:
+
+            print('Invalid Option. Please Try Again.')
+
+    return option
+    
 
 while True:
 
-    print('=' * 50)
+    option = show_menu()
 
-    print('{:^50}'.format('GERENCIADOR DE TAREFAS'))
+    if option == '1':
 
-    print('=' * 50)
+        try:
+            task_title = input('Enter the task title: ')
+            added_task = add_task(task_title)
 
-    print('  1 - Adicionar Tarefa')
-    print('  2 - Excluir Tarefa')
-    print('  3 - Listar Tarefas')
-    print('  4 - Marcar Tarefa como Concluída/Pendente')
-    print('  5 - Sair do Programa')
+            sleep(1)
 
-    print('=' * 50)
+            print(f'Task {added_task["title"]} added successfully!')
 
-    opcao = ' '
+        except ValueError as error:
+            print(f'Error: {error}. Please Try Again.')
 
-    while opcao not in ['1', '2', '3', '4', '5']:
 
-        opcao = input('Digite a Opção Desejada: ')
+    elif option == '2':
+        
+        tasks = list_tasks()
 
-        if opcao not in ['1', '2', '3', '4', '5']:
+        if not tasks:
+            print('No tasks found to delete.')
+        else:
+            show_tasks(tasks)
 
-            print('Opção Inválida. Tente Novamente.')
+        try:
+            idx_removed_task = int(input('Enter the index of the task you want to delete: '))
+            removed_task = delete_task(idx_removed_task)
 
-        if opcao == '1':
+            sleep(1)
 
-            adicionar_tarefa()
+            print(f'Task "{removed_task.get("title")}" deleted successfully!')
 
-        elif opcao == '2':
+        except ValueError as error:
+            print(f'Error: {error}. Please Try Again.')
 
-            excluir_tarefa()
+        except IndexError as error:
+            print(f'Error: {error}. Please Try Again.')
 
-        elif opcao == '3':
 
-            listar_tarefas()
+    elif option == '3':
 
-        elif opcao == '4':
+        show_tasks(list_tasks())
 
-            marcar_tarefa()
 
-        elif opcao == '5':
+    elif option == '4':
 
-            print('Saindo do Programa...')
-            sleep(2)
+        tasks = list_tasks()
 
-            print('Programa Encerrado.')
-            break
+        if not tasks:
+            print('No tasks found to toggle.')
+        else:
+            show_tasks(tasks)
 
-    if opcao == '5':
+        try:
+            idx_toggle_task = int(input('Enter the index of the task you want to toggle: '))
+            toggled_task = toggle_task_status(idx_toggle_task)
+            status = 'Completed' if toggled_task.get('completed') else 'Pending'
+
+            sleep(1)
+
+            print(f'Task "{toggled_task.get("title")}" marked as {status}, successfully!')
+        
+        except ValueError as error:
+            print(f'Error: {error}. Please Try Again.')
+
+        except IndexError as error:
+            print(f'Error: {error}. Please Try Again.')
+
+
+    elif option == '0':
+
+        print('Leaving the Program...')
+        
+        sleep(2)
+
+        print('Program Closed.')
         break
 
+    sleep(1)
