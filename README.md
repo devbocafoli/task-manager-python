@@ -1,28 +1,86 @@
-# Task Manager Python 🚀
+# 🗂 Task Manager - Python
 
-[![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)](https://www.python.org/)  
-[![License](https://img.shields.io/badge/License-MIT-green)](https://opensource.org/licenses/MIT)
-    
-    Manage your tasks simply and efficiently using Python.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Pytest](https://img.shields.io/badge/Tests-pytest-green)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![License](https://img.shields.io/badge/License-Study%20Project-lightgrey)
 
-## 🔹Description
+A task manager built in Python with a focus on clean architecture, code organization, and automated testing.
 
-    This project is a simple task manager written in Python. It allows you to add, list, and remove tasks, saving the data to a JSON file. It's ideal for those who want to organize their tasks practically without relying on complex software.
+---
 
-## 🔹Features
+## 🚀 About the Project
 
-- ✅ Add new tasks
-- ✅ List all tasks
-- ✅ Mark tasks as completed/pending
-- ✅ Edit or remove existing tasks
-- ✅ Data storage in JSON
+This project started as a simple CLI application to practice logic and JSON file handling, but it evolved into a more professional structure applying real-world software development concepts.
 
-## 🔹Technologies
+The project now includes:
 
-- Python 3.11+
-- JSON (for data storage)
+* Layered architecture (models, services, storage)
+* Clear separation of responsibilities
+* JSON-based data persistence
+* Automated testing with pytest
+* Dependency isolation in tests
+* Structure prepared for future scalability
 
-## 🔹How to Use
+---
+
+## 🧠 What Was Learned During Development
+
+Throughout the development process, the following concepts were practiced and strengthened:
+
+### 📦 Project Structure
+
+* Separation between business logic and persistence
+* Modular organization
+
+### 🗃 Data Persistence
+
+* Working with JSON files
+* Exception handling
+* Object serialization (to_dict)
+* Object reconstruction (from_dict)
+
+### 🧪 Automated Testing
+
+* Using pytest
+* Writing unit tests
+* Using tmp_path for temporary files
+* Using monkeypatch to isolate dependencies
+* Testing the models layer
+* Testing the services layer
+* Testing the storage layer
+
+### 🔎 Debugging & Code Quality
+
+* Reading and understanding tracebacks
+* Fixing import errors
+* Resolving inconsistencies between tests and implementation
+* Proper usage of assert
+
+---
+
+## 🏗 Project Structure
+
+```
+task-manager-python/
+├─ src/
+│ ├─ task_manager/
+│ │ ├─ models/
+│ │ │ ├─ tasks.py
+│ │ ├─ services.py
+│ │ ├─ storage.py
+│ ├─ main.py
+├─ .gitignore
+├─ README.mdsrc/
+├─ tests/
+│ ├─ test_tasks.py
+│ ├─ test_services.py
+│ ├─ test_storage.py
+```
+
+---
+
+## ▶️ How to Run
 
 1. Clone this Repository:
 ```bash
@@ -41,63 +99,40 @@ python main.py
 
 4. Follow the instructions in the menu to manage your tasks.
 
-## 🔹Estrutura do Projeto
-```
-task-manager-python/
-├─ src/
-│ ├─ task_manager/
-│ │ ├─ models/
-│ │ │ ├─ tasks.py
-│ │ ├─ services.py
-│ │ ├─ storage.py
-│ ├─ main.py
-├─ .gitignore
-├─ README.md
-```
+---
 
-## 🔹What I Learned
-- How to organize a Python project in a modular way (separating models, services, and storage)
-- Manipulating JSON files to save and load data
-- Creating interactive menus in the terminal
-- Concepts of functions, classes, and static methods
-- How to plan and refactor code to make it cleaner and more readable
-- Error handling
+## ⚔️ Challenges Faced
 
-## 🔹Challenges Faced:
+During development, several important challenges appeared:
 
-- Ensuring data was saved correctly in the JSON file.
-- Structuring the project in a way that was scalable and easy to understand.
-- Handling user input and preventing errors during execution.
+* Persistence not saving correctly at first
+* AttributeError when testing storage
+* Initial difficulties with virtual environments
+* Understanding monkeypatch and test isolation
 
-## 🔹 Next steps / improvements
+Each challenge was solved through debugging, reading error messages, and refactoring.
 
-- Implement automated tests with pytest
-- Add a prioritization system for tasks
-- Create a version with a graphical user interface (GUI)
-- Add advanced task filters and searches
+---
 
-## 🔹 Contributions
+## 📈 Future Improvements
 
-Contributions are welcome! If you want to improve this project:
+* Implement SQLite database
+* Build an API using FastAPI
+* Add a task history system
+* Improve error handling
+* Add test coverage reporting
 
-1. Fork this repository.
+---
 
-2. Create a branch with your feature:
-```bash
-git checkout -b my-feature
-```
+## 💡 Project Goal
 
-3. Commit your changes:
-```bash
-git commit -m "My contribution"
-```
+More than just a task manager, this project represents practical growth in Python, testing, and software organization.
 
-4. Push to the original branch:
-```bash
-git push origin my-feature
-```
+It demonstrates the transition from simple scripts to a more market-ready project structure.
 
-5. Open a Pull Request.
+---
+
+Built for study, practice, and continuous improvement 🚀
 
 ## 🔹License
 

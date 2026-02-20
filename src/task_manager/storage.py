@@ -2,8 +2,8 @@ import json
 from task_manager.models.tasks import Task
 from pathlib import Path
 
-BASE_DIR = Path(__file__).parent.parent.parent
-tasks_file = BASE_DIR / "data" / "data.json"
+FILE_PATH = Path(__file__).parent.parent.parent
+tasks_file = FILE_PATH / "data" / "data.json"
 
 def load_tasks():
 

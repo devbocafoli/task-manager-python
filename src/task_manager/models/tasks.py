@@ -23,6 +23,7 @@ class Task:
         }
 
 
+    @staticmethod
     def from_dict(data : dict):
 
         """Create a Task object from a dictionary."""
